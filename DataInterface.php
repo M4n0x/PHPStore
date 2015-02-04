@@ -11,6 +11,9 @@
  * @link http://stormbox.ch/store website for more informations about this store
  */
 interface DataInterface extends \SplObserver, \SplSubject {
+    CONST DATA_CREATE = 0;
+    CONST DATA_UPDATE = 1;
+    CONST DATA_DELETE = 2;
     
     /**
      * Method call when Subject notifying observers. you can cast multiple updater like update(StoreManager) {//do this } or update(MemberData){//update related content}
@@ -36,22 +39,10 @@ interface DataInterface extends \SplObserver, \SplSubject {
     public function setId($string);
     
     /**
-     * Return a boolean. TRUE each change store directly on the store, FALSE you have to use StoreManager->store() to manually store data.
-     * @return boolean
-     */
-    public function canBeUpdateOnChange();
-    
-    /**
      * When changes are made on data, call all referenced types.
      * @return boolean TRUE Notify reference objects, FALSE referenced object is not called.
      */
     public function canNotifyRelations();
-    
-    /**
-     * Return a boolean. TRUE each change store directly on the store, FALSE you have to use StoreManager->store() to manually store data.
-     * @param boolean $canBeUpdateOnChange
-     */
-    public function setCanBeUpdateOnChange($canBeUpdateOnChange);
     
     /**
      * When changes are made on data, call all referenced types.

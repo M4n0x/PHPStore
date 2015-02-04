@@ -22,37 +22,38 @@ abstract class DataAbstract implements DataInterface {
      * The value determine if the data can be update when an attribute is modified
      * @var boolean 
      */
-    private $_UpdateOnChange = false;
 
-    /**
-     * This attribute determine if observers can be notified on change
-     * @var boolean 
-     */
     private $_NotifyRelations = false;
 
     /**
      * Contains all observers
      * @var array 
      */
-    private $observers = array();
+    private $_observers = array();
+    
+    /**
+     * State of data
+     * @var int State of data
+     */
+    private $_state = DataInterface::DATA_CREATE;
 
     //add observer
     public function attach(\SplObserver $observer) {
-        $this->observers[] = $observer;
+        $this->_observers[] = $observer;
     }
 
     //remove observer
     public function detach(\SplObserver $observer) {
 
-        $key = array_search($observer, $this->observers, true);
+        $key = array_search($observer, $this->_observers, true);
         if ($key) {
-            unset($this->observers[$key]);
+            unset($this->_observers[$key]);
         }
     }
 
     //notify observers(or some of them)
     public function notify() {
-        foreach ($this->observers as $value) {
+        foreach ($this->_observers as $value) {
             $value->update($this);
         }
     }
@@ -71,22 +72,20 @@ abstract class DataAbstract implements DataInterface {
         $this->_Id = $string;
     }
 
-    public function canBeUpdateOnChange() {
-        return $this->_UpdateOnChange;
-    }
-
-    
     public function canNotifyRelations() {
         return $this->_NotifyRelations;
-    }
-
-    function setCanBeUpdateOnChange($canBeUpdateOnChange) {
-        $this->_UpdateOnChange = $canBeUpdateOnChange;
     }
 
     function setCanNotifyRelations($canNotifyRelations) {
         $this->_NotifyRelations = $canNotifyRelations;
     }
+    
+    function getState() {
+        return $this->_state;
+    }
 
-
+    function setState($state) {
+        $this->_state = $state;
+    }
+    
 }
