@@ -12,7 +12,7 @@
  * @author Steve
  */
 class APCComponent implements CacheComponent {
-    private $_keystore = "bluestorm_apc";
+    const KEYSTORE = "bluestorm_apc";
     
     public function getKeyStoreName() {
         return $this->_keystore;
@@ -30,5 +30,21 @@ class APCComponent implements CacheComponent {
         } else {
             throw new StoreException("The store can't be empty, otherwise no need to be stored");
         }
+    }
+    
+    public function saveData(\DataInterface $data) {
+        ;
+    }
+    
+    public function existData(\DataInterface $data) {
+        ;
+    }
+    
+    public function getFromCache($dataId) {
+        ;
+    }
+    
+    public function deleteData(\DataInterface $data) {
+        ;
     }
 }

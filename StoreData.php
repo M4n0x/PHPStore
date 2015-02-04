@@ -16,4 +16,5 @@ class StoreData {
     private $_objectsCmpt = 0;
     
     private $_store = array();
+
 }

@@ -21,4 +21,30 @@ interface CacheComponent {
      * @param StoreData $store
      */
     public function setInstance(StoreData $store);
+    
+    
+    /**
+     * Method used to store data in cache
+     * @param DataInterface $data
+     */
+    public function saveData(DataInterface $data);
+    
+    
+    /**
+     * Method used to retrieve data from cache store
+     * @param String $dataId key used to store data
+     */
+    public function getFromCache($dataId);
+    
+    /**
+     * Method used to check if a ref exist before writing down
+     * @param String $data id
+     */
+    public function existData(DataInterface $data);
+    
+    /**
+     * Method use to delete reference in cache
+     * @param DataInterface $data
+     */
+    public function deleteData(DataInterface $data);
 }

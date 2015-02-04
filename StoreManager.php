@@ -30,4 +30,12 @@ class StoreManager {
     protected function existId($id, $type = null) {
         
     }
+    
+    public function store(DataInterface $data) {
+        //create an id and go to store...
+    }
+    
+    public function update(DataInterface $data) {
+        //check valid id + go to store
+    }
 }
