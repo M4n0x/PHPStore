@@ -50,4 +50,15 @@ interface DataInterface extends \SplObserver, \SplSubject {
      */
     public function setCanNotifyRelations($canNotifyRelations);
     
+    /**
+     * Allow to get current operation on data >_ update, create, delete
+     */
+    public function getState();
+    
+    /**
+     * Allow to set state of data
+     * @param int $data_state use CONST in DataInterface
+     */
+    public function setState($data_state);
+    
 }
