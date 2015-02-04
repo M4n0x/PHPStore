@@ -12,39 +12,35 @@
  * @author Steve
  */
 class APCComponent implements CacheComponent {
-    const KEYSTORE = "bluestorm_apc";
     
-    public function getKeyStoreName() {
-        return $this->_keystore;
-    }
     
-    public function getInstance() {
-        $store = apc_fetch($this->getKeyStoreName());
+    public function getInstance($storeName) {
+        $store = apc_fetch($storeName);
         
         return $store;
     }
     
-    public function setInstance($store) {
+    public function setInstance($storeName, $store) {
         if (!empty($store)) {
-            apc_store($this->getKeyStoreName(), serialize($store));
+            apc_store($storeName, serialize($store));
         } else {
             throw new StoreException("The store can't be empty, otherwise no need to be stored");
         }
     }
     
-    public function saveData(\DataInterface $data) {
-        ;
+    public function save($keyName, DataInterface $data) {
+        apc_store($keyName, $data);
     }
     
-    public function existData(\DataInterface $data) {
-        ;
+    public function exist($keyName) {
+        return !empty(apc_fetch($keyName));
     }
     
-    public function getFromCache($dataId) {
-        ;
+    public function get($keyName) {
+        return apc_fetch($keyName);
     }
     
-    public function deleteData(\DataInterface $data) {
-        ;
+    public function deleteKey($keyName) {
+        return apc_delete($keyName);
     }
 }

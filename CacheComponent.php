@@ -9,42 +9,41 @@
  */
 interface CacheComponent {
     
-    public function getKeyStoreName();
-    
     /**
+     * @param String $storeName keyname for the store in cache
      * @return StoreData|false StoreData to play with, or false if not set
      */
-    public function getInstance();
+    public function getInstance($storeName);
     
     /**
      * This method will only manage saving the StoreData on the cache (by serializing by exemple)
+     * @param String $storeName the keyname of the store to get
      * @param StoreData $store
      */
-    public function setInstance(StoreData $store);
-    
+    public function setInstance($storeName, StoreData $store);
     
     /**
      * Method used to store data in cache
+     * @param String $keyName data id --> keyname
      * @param DataInterface $data
      */
-    public function saveData(DataInterface $data);
-    
+    public function save($keyName, DataInterface $data);
     
     /**
      * Method used to retrieve data from cache store
-     * @param String $dataId key used to store data
+     * @param String $keyName data id --> keyname
      */
-    public function getFromCache($dataId);
+    public function get($keyName);
     
     /**
      * Method used to check if a ref exist before writing down
-     * @param String $data id
+     * @param String $keyName data id --> keyname
      */
-    public function existData(DataInterface $data);
+    public function exist($keyName);
     
     /**
      * Method use to delete reference in cache
-     * @param DataInterface $data
+     * @param String $keyName
      */
-    public function deleteData(DataInterface $data);
+    public function delete($keyName);
 }
