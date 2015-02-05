@@ -36,7 +36,7 @@ class StoreManager {
      * @param String $storeId storeid to retrieve the storeData
      */
     function __construct($storeId) {
-        $this->_storeId;
+        $this->_storeId = $storeId;
     }
 
     
