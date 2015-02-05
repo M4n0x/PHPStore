@@ -40,7 +40,7 @@ class APCComponent implements CacheComponent {
         return apc_fetch($keyName);
     }
     
-    public function deleteKey($keyName) {
+    public function delete($keyName) {
         return apc_delete($keyName);
     }
 }

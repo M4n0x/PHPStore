@@ -24,16 +24,31 @@ class StoreManager {
      * @var StoreIndex 
      */
     protected $_index;
-       
+    
+    /**
+     *
+     * @var String 
+     */
+    private $_storeId;
+    
+    /**
+     * 
+     * @param String $storeId storeid to retrieve the storeData
+     */
+    function __construct($storeId) {
+        $this->_storeId;
+    }
+
+    
     protected function initStore(CacheComponent $cacheObj) {
         $this->cacheObj = $cacheObj;
-        $store = $this->cacheObj->getInstance();
+        $store = $this->cacheObj->getInstance($this->_storeId);
         
         if ($store) {
             $this->_index = $store;
         } else {
             $this->_index = new StoreIndex();
-            $this->cacheObj->setInstance($this->_index);
+            $this->cacheObj->setInstance($this->_storeId,$this->_index);
         }
     }
     
