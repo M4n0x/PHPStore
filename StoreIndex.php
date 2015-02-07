@@ -27,10 +27,25 @@ class StoreIndex {
         unset($this->_store[get_class($data)][$data->getId()]);
     }
     
-    function addData(DataInterface $data) {
+    public function addData(DataInterface $data) {
         //Fabric metadata
-        $this->_store[get_class($data)][$data->getId()] = $data->getSignature();
-    } 
+        if (empty($data) || empty($data->getId()) || $this->existData($data)) {
+            return false;
+        }
+        return $this->_store[get_class($data)][$data->getId()] = $data->getSignature();
+    }
+    
+    public function updateData(DataInterface $data) {
+        //Fabric metadata
+        if (!empty($data) && !empty($data->getId()) && $this->existData($data)) {
+            return $this->_store[get_class($data)][$data->getId()] = $data->getSignature();
+        }
+        return false;
+    }
+    
+    function existData(DataInterface $data) {
+        return array_key_exists($this->_store, $data->getId());
+    }
 
     function setLastId($lastId) {
         $this->_lastId = $lastId;
@@ -39,8 +54,5 @@ class StoreIndex {
     function setStore($store) {
         $this->_store = $store;
     }
-
-
-
 
 }
