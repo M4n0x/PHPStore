@@ -19,13 +19,6 @@ abstract class DataAbstract implements DataInterface {
     private $_Id;
 
     /**
-     * The value determine if the data can be update when an attribute is modified
-     * @var boolean 
-     */
-
-    private $_NotifyRelations = false;
-
-    /**
      * Contains all observers
      * @var array 
      */
@@ -58,7 +51,7 @@ abstract class DataAbstract implements DataInterface {
         }
     }
 
-    abstract public function update(\SplSubject $subject);
+    //abstract public function update(\SplSubject $subject);
 
     public function getSignature() {
         return md5(serialize($this));
@@ -70,14 +63,6 @@ abstract class DataAbstract implements DataInterface {
 
     public function setId($string) {
         $this->_Id = $string;
-    }
-
-    public function canNotifyRelations() {
-        return $this->_NotifyRelations;
-    }
-
-    function setCanNotifyRelations($canNotifyRelations) {
-        $this->_NotifyRelations = $canNotifyRelations;
     }
     
     function getState() {
