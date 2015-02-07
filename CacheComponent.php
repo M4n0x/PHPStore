@@ -10,19 +10,6 @@
 interface CacheComponent {
     
     /**
-     * @param String $storeName keyname for the store in cache
-     * @return StoreIndex|false StoreData to play with, or false if not set
-     */
-    public function getInstance($storeName);
-    
-    /**
-     * This method will only manage saving the StoreData on the cache (by serializing by exemple)
-     * @param String $storeName the keyname of the store to get
-     * @param StoreIndex $store
-     */
-    public function setInstance($storeName, StoreIndex $store);
-    
-    /**
      * Method used to store data in cache
      * @param String $keyName data id --> keyname
      * @param DataInterface $data

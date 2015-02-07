@@ -7,26 +7,11 @@
  */
 
 /**
- * Description of APCComponent
+ * Basic layer, only to crud fonction with a cache mechanism (can simply be a text file by exemple)
  *
  * @author Steve
  */
 class APCComponent implements CacheComponent {
-    
-    
-    public function getInstance($storeName) {
-        $store = apc_fetch($storeName);
-        
-        return $store;
-    }
-    
-    public function setInstance($storeName, $store) {
-        if (!empty($store)) {
-            apc_store($storeName, serialize($store));
-        } else {
-            throw new StoreException("The store can't be empty, otherwise no need to be stored");
-        }
-    }
     
     public function save($keyName, DataInterface $data) {
         apc_store($keyName, $data);
