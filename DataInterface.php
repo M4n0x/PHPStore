@@ -11,15 +11,11 @@
  * @link http://stormbox.ch/store website for more informations about this store
  */
 interface DataInterface extends \SplObserver, \SplSubject {
-    CONST DATA_CREATE = 0;
-    CONST DATA_UPDATE = 1;
-    CONST DATA_DELETE = 2;
-    
-    /**
-     * Method call when Subject notifying observers. you can cast multiple updater like update(StoreManager) {//do this } or update(MemberData){//update related content}
-     * @param \SplSubject $subject
-     */
-    //public function update(\SplSubject $subject);
+    CONST DATA_CREATED = 0;
+    CONST DATA_UPDATED = 1;
+    CONST DATA_OK      = 2;
+    CONST DATA_DELETED = 3;
+
     
     /**
      * @return String return a signature (originally a MD5 of current object) to check if object changed
@@ -39,26 +35,14 @@ interface DataInterface extends \SplObserver, \SplSubject {
     public function setId($string);
     
     /**
-     * When changes are made on data, call all referenced types.
-     * @return boolean TRUE Notify reference objects, FALSE referenced object is not called.
-     */
-    public function canNotifyRelations();
-    
-    /**
-     * When changes are made on data, call all referenced types.
-     * @param boolean $canNotifyRelations
-     */
-    public function setCanNotifyRelations($canNotifyRelations);
-    
-    /**
-     * Allow to get current operation on data >_ update, create, delete
+     * Allow to get current operation on data >_ update, create, delete (you have to implement an attribut type int)
      */
     public function getState();
     
     /**
-     * Allow to set state of data
+     * Allow to set state of data (you have to implement an attribut type int (same attribut as above))
      * @param int $data_state use CONST in DataInterface
      */
     public function setState($data_state);
-    
+ 
 }
